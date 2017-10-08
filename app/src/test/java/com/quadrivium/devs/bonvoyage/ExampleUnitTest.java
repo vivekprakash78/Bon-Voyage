@@ -1,4 +1,4 @@
-package com.embark.bonvoyage;
+package com.quadrivium.devs.bonvoyage;
 
 import org.junit.Test;
 

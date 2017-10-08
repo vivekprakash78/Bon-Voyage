@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="16dp"
+    android:background="@color/colorPrimary">
+    <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+    <LinearLayout
+        android:id="@+id/linearLayout_focus"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:orientation="horizontal" />
+    <ImageView
+        android:id="@+id/headerImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_bon_voyage"/>
+    <LinearLayout
+        android:id="@+id/signInForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headerImage"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:theme="@style/InputLayout">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_user"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/colorAccent"
+                android:hint="Username"
+                android:textColor="@color/colorText"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:theme="@style/InputLayout">
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_password"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/colorAccent"
+                android:hint="Password"
+                android:textColor="@color/colorText"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </android.support.design.widget.TextInputLayout>
+        <Button android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="Sign in"
+            android:textSize="16sp"
+            android:onClick="showError"/>
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Forgot password? Tap Here"
+            android:padding="8dp"
+            android:textColor="@color/colorText"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/social_login"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"/>
+        <TextView
+            android:id="@+id/alternateSignInText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:theme="@style/TextViewStyle"
+            android:layout_below="@id/separator"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:text="Or, Sign in with"/>
+        <LinearLayout
+            android:id="@+id/alternateSignIn"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/alternateSignInText"
+            android:layout_margin="8dp"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/google_login"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_google"/>
+            <ImageButton
+                android:id="@+id/facebook_login"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_toRightOf="@id/google_login"
+                android:layout_marginLeft="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_facebook"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textSignup"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="New to Bon Voyage? Create new Account"
+            android:theme="@style/TextViewStyle"
+            android:layout_below="@id/alternateSignIn"/>
+    </RelativeLayout>
+</RelativeLayout>

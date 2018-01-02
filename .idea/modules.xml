@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Bon-Voyage.iml" filepath="$PROJECT_DIR$/Bon-Voyage.iml" />
+      <module fileurl="file://C:\Users\vivek\Documents\Github\Bon-Voyage\Bon-Voyage.iml" filepath="C:\Users\vivek\Documents\Github\Bon-Voyage\Bon-Voyage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\vivek\Documents\Github\Bon-Voyage\app\app.iml" filepath="C:\Users\vivek\Documents\Github\Bon-Voyage\app\app.iml" />
     </modules>
   </component>
 </project>

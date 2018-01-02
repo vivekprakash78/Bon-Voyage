@@ -65,5 +65,14 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_facebook"/>
         </LinearLayout>
+        <TextView
+            android:id="@+id/skipText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:theme="@style/TextViewStyle"
+            android:layout_below="@id/alternateSignIn"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:text="Or, Skip"/>
     </RelativeLayout>
 </RelativeLayout>

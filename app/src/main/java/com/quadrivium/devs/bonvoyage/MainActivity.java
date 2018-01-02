@@ -1,9 +1,12 @@
 package com.quadrivium.devs.bonvoyage;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -14,8 +17,18 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
-        // Give the TabLayout the ViewPager
+
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        TextView skipText = (TextView) findViewById(R.id.skipText);
+        skipText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 }

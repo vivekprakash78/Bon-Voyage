@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -34,6 +36,13 @@ public class HomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header=navigationView.getHeaderView(0);
+
+        TextView name = (TextView)header.findViewById(R.id.userName);
+        TextView email = (TextView)header.findViewById(R.id.userEmail);
+        name.setText("Vivek Prakash");
+        email.setText("vivekprakash78@gmail.com");
     }
 
     @Override
@@ -63,12 +72,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_about_us) {
 
         } else if (id == R.id.nav_sign_out) {
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("Pref", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.clear();
-            editor.commit();
-            startActivity(new Intent( HomeActivity.this, SplashActivity.class));
             finish();
+            SharedPrefManager.getInstance(getApplicationContext()).logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -86,6 +91,7 @@ public class HomeActivity extends AppCompatActivity
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
                 (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 

@@ -22,7 +22,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/fullname"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
@@ -85,7 +85,8 @@
                 android:inputType="textPassword"
                 android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
-        <Button android:layout_height="wrap_content"
+        <Button android:id="@+id/signUpButton"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/colorAccent"
             android:text="Sign Up"

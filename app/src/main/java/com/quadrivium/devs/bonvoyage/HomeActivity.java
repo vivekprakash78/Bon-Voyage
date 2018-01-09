@@ -39,10 +39,11 @@ public class HomeActivity extends AppCompatActivity
 
         View header=navigationView.getHeaderView(0);
 
-        TextView name = (TextView)header.findViewById(R.id.userName);
-        TextView email = (TextView)header.findViewById(R.id.userEmail);
-        name.setText("Vivek Prakash");
-        email.setText("vivekprakash78@gmail.com");
+        TextView name = header.findViewById(R.id.userName);
+        TextView email = header.findViewById(R.id.userEmail);
+        User user=SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        name.setText(user.getName());
+        email.setText(user.getEmail());
     }
 
     @Override

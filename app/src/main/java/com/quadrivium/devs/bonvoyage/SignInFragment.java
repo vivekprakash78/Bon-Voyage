@@ -78,7 +78,7 @@ public class SignInFragment extends Fragment {
 
                             //if no error in response
                             if (!obj.getBoolean("error")) {
-                                Toast.makeText(getContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Succesfully Logged in", Toast.LENGTH_SHORT).show();
                                 //getting the user from the response
                                 JSONObject userJson = obj.getJSONObject("user");
 

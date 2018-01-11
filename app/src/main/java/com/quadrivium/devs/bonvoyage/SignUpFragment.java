@@ -84,7 +84,7 @@ public class SignUpFragment extends Fragment {
             editTextReenterPassword.requestFocus();
             return;
         }
-
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override

@@ -9,16 +9,33 @@
     tools:showIn="@layout/app_bar_home"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
-    android:background="@color/colorPrimaryDark">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="10dp"
-        >
-        <TextView android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:id="@+id/txtAddress"/>
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:elevation="10dp">
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:weightSum="1">
+            <ImageView android:layout_height="32dp"
+                android:layout_width="32dp"
+                app:srcCompat="@drawable/ic_location"
+                android:layout_weight="0.2"/>
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:theme="@style/TextViewStyle"
+                android:textSize="20dp"
+                android:layout_weight="0.8"
+                android:id="@+id/txtAddress"/>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
+
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:theme="@style/TextViewStyle"
+        android:id="@+id/txtCity"/>
 
 </LinearLayout>

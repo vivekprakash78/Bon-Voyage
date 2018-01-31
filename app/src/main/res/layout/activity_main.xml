@@ -41,7 +41,8 @@
             android:layout_below="@id/separator"
             android:textSize="16sp"
             android:layout_centerHorizontal="true"
-            android:text="Or, Sign in with"/>
+            android:text="Or, Sign in with"
+            android:textColor="@color/colorText"/>
         <LinearLayout
             android:id="@+id/alternateSignIn"
             android:layout_height="wrap_content"
@@ -55,7 +56,7 @@
                 android:layout_height="32dp"
                 android:layout_marginRight="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_google"/>
+                app:srcCompat="@drawable/ic_google"/>
             <ImageButton
                 android:id="@+id/facebook_login"
                 android:layout_width="32dp"
@@ -63,7 +64,7 @@
                 android:layout_toRightOf="@id/google_login"
                 android:layout_marginLeft="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_facebook"/>
+                app:srcCompat="@drawable/ic_facebook"/>
         </LinearLayout>
         <TextView
             android:id="@+id/skipText"
@@ -73,6 +74,7 @@
             android:layout_below="@id/alternateSignIn"
             android:textSize="16sp"
             android:layout_centerHorizontal="true"
-            android:text="Or, Skip"/>
+            android:text="Or, Skip"
+            android:textColor="@color/colorText"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.quadrivium.devs.bonvoyage;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,13 +28,12 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView txtAddress;
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, sunrise_field,sunset_field, weatherIcon, updatedField;
+    Typeface weatherFont;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE=1;
     AppLocationService appLocationService;
     @Override
@@ -60,8 +60,6 @@ public class HomeActivity extends AppCompatActivity
         name.setText(user.getName());
         email.setText(user.getEmail());
 
-
-        txtAddress = (TextView) findViewById(R.id.txtAddress);
         appLocationService = new AppLocationService(
                 HomeActivity.this);
 
@@ -93,7 +91,7 @@ public class HomeActivity extends AppCompatActivity
                 default:
                     locationAddress = null;
             }
-            txtAddress.setText(locationAddress);
+            findWeather(locationAddress);
         }
 
     }
@@ -129,7 +127,7 @@ public class HomeActivity extends AppCompatActivity
             SharedPrefManager.getInstance(getApplicationContext()).logout();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -171,9 +169,12 @@ public class HomeActivity extends AppCompatActivity
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-
-                TextView txtCity=(TextView)findViewById(R.id.txtCity);
-                txtCity.setText("City name : " + place.getName());
+                Intent intent = new Intent(this, CityActivity.class);
+                Bundle b = new Bundle();
+                b.putString("id", place.getId());
+                b.putString("name", place.getName().toString());
+                intent.putExtras(b);
+                startActivity(intent);
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 Toast.makeText(this,status.getStatusMessage(),Toast.LENGTH_SHORT).show();
@@ -181,5 +182,36 @@ public class HomeActivity extends AppCompatActivity
                 Toast.makeText(this,"Cancelled",Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    protected void findWeather(String locationAddress){
+
+        weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
+
+        cityField = (TextView)findViewById(R.id.city_field);
+        updatedField = (TextView)findViewById(R.id.updated_field);
+        detailsField = (TextView)findViewById(R.id.details_field);
+        currentTemperatureField = (TextView)findViewById(R.id.current_temperature_field);
+        humidity_field = (TextView)findViewById(R.id.humidity_field);
+        sunrise_field = (TextView)findViewById(R.id.sunrise_field);
+        sunset_field = (TextView)findViewById(R.id.sunset_field);
+        weatherIcon = (TextView)findViewById(R.id.weather_icon);
+        weatherIcon.setTypeface(weatherFont);
+
+
+        Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
+            public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_sunrise,String weather_sunset, String weather_updatedOn, String weather_iconText, String sun_rise) {
+
+                cityField.setText(weather_city);
+                updatedField.setText("Updated: "+weather_updatedOn);
+                detailsField.setText("Conditions: "+weather_description);
+                currentTemperatureField.setText(weather_temperature);
+                humidity_field.setText("Humidity: "+weather_humidity);
+                sunrise_field.setText("Sunrise: "+weather_sunrise);
+                sunset_field.setText("Sunset: "+weather_sunset);
+                weatherIcon.setText(Html.fromHtml(weather_iconText));
+
+            }
+        });
+        asyncTask.execute(locationAddress);
     }
 }

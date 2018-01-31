@@ -7,5 +7,5 @@ package com.quadrivium.devs.bonvoyage;
 public class URLs {
         public static final String URL_REGISTER = "https://quadrivium-devs.000webhostapp.com/register.php";
         public static final String URL_LOGIN= "https://quadrivium-devs.000webhostapp.com/login.php";
-
+        public static final String GetPlaces= "https://maps.googleapis.com/maps/api/place/textsearch/json";
 }

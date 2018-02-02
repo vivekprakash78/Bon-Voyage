@@ -22,7 +22,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/fullname"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="16dp"
-                android:hint="Username"
+                android:hint="E-mail"
                 android:textColor="@color/colorText"
                 android:inputType="textEmailAddress"
                 android:maxLines="1" />
@@ -70,24 +70,33 @@
                 android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/reenter_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:errorEnabled="true"
             android:theme="@style/InputLayout">
-            <EditText
-                android:id="@+id/bday"
+            <android.support.design.widget.TextInputEditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_date"
+                android:drawableStart="@drawable/ic_password"
                 android:drawablePadding="16dp"
-                android:hint="Date of Birth"
+                android:hint="Re-enter password"
                 android:textColor="@color/colorText"
-                android:clickable="true"
-                android:focusable="false"/>
+                android:inputType="textPassword"
+                android:maxLines="1" />
         </android.support.design.widget.TextInputLayout>
-        <Button android:layout_height="wrap_content"
+        <Button android:id="@+id/signUpButton"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/colorAccent"
             android:text="Sign Up"
             android:textSize="16sp"/>
     </LinearLayout>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
 </RelativeLayout>

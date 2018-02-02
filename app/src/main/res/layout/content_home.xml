@@ -1,11 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.quadrivium.devs.bonvoyage.HomeActivity"
-    tools:showIn="@layout/app_bar_home">
-
-</android.support.constraint.ConstraintLayout>
+    tools:showIn="@layout/app_bar_home"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingHorizontal="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:elevation="10dp">
+        <LinearLayout android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:weightSum="1">
+            <ImageView android:layout_height="32dp"
+                android:layout_width="32dp"
+                app:srcCompat="@drawable/ic_location"
+                android:layout_weight="0.2"/>
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:theme="@style/TextViewStyle"
+                android:textSize="20dp"
+                android:layout_weight="0.8"
+                android:id="@+id/city_field"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:elevation="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/weather_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:textSize="70sp"/>
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/weather_icon"
+                android:layout_alignParentRight="true"
+                android:padding="16dp"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/current_temperature_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25sp"
+                    />
+                <TextView
+                    android:id="@+id/details_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/humidity_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/sunrise_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/weather_icon"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/sunset_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sunrise_field"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/updated_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sunset_field"
+                android:layout_alignParentRight="true"
+                android:textSize="10sp"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

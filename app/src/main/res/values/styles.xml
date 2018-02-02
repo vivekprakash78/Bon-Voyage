@@ -17,14 +17,12 @@
     <style name="InputLayout" parent="Theme.Design">
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="android:cursorVisible">false</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
 
     <style name="TextViewStyle">
-        <item name="android:textColor">@color/colorText</item>
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 

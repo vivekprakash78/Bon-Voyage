@@ -1,6 +1,7 @@
 package com.quadrivium.devs.bonvoyage;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,18 @@ public class SpotListAdapter extends ArrayAdapter<Spot> {
 
             spotName.setText(currentSpot.getSpotname());
             spotAddress.setText(currentSpot.getSpotAddress());
-            spotOpenNow.setText(currentSpot.getSpotOpenNow().toString());
-            spotRating.setText(""+currentSpot.getspotRating());
+            if(currentSpot.getSpotOpenNow()){
+                spotOpenNow.setTextColor(Color.rgb(42,230,50)); //2ae632
+                spotOpenNow.setText("Open Now");
+            }
+            else{
+                spotOpenNow.setTextColor(Color.rgb(255,58,58));
+                spotOpenNow.setText("Closed");
+            }
+            if(currentSpot.getspotRating()!=0.0)
+                spotRating.setText(""+currentSpot.getspotRating());
+            else
+                spotRating.setText("- -");
             return listItemView;
         }
 

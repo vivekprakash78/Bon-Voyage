@@ -1,6 +1,5 @@
 package com.quadrivium.devs.bonvoyage;
 
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -32,10 +31,11 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView cityField, detailsField, currentTemperatureField, humidity_field, sunrise_field,sunset_field, weatherIcon, updatedField;
+    TextView cityField, detailsField, currentTemperatureField, humidity_field, sunrise_field, sunset_field, weatherIcon, updatedField;
     Typeface weatherFont;
-    int PLACE_AUTOCOMPLETE_REQUEST_CODE=1;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     AppLocationService appLocationService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +74,6 @@ public class HomeActivity extends AppCompatActivity
                     getApplicationContext(), new GeocoderHandler());
         } else {
             Toast.makeText(this, "Location service is disabled", Toast.LENGTH_SHORT).show();
-
         }
     }
 

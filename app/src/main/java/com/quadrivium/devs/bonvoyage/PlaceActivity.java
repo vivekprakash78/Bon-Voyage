@@ -6,7 +6,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -17,8 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PlaceActivity extends AppCompatActivity {
 
@@ -38,6 +35,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void findPlaces(String query,String name){
+        query = query.replaceAll(" ", "%20");
         String url=URLs.GetPlaces+"?query="+query+"%20in%20"+name+"&key=AIzaSyBlOCbMZbhhrCCvrlOo0H2GKsT1vLNtQ8U";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,

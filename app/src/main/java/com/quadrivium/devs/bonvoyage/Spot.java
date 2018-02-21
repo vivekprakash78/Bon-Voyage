@@ -25,7 +25,7 @@ public class Spot {
     public String getSpotID() {
         return spotID;
     }
-    public String getSpotname() {
+    public String getSpotName() {
         return spotName;
     }
     public String getSpotAddress(){
@@ -34,7 +34,7 @@ public class Spot {
     public Boolean getSpotOpenNow(){
         return spotOpenNow;
     }
-    public double getspotRating() {
+    public double getSpotRating() {
         return spotRating;
     }
 

@@ -1,7 +1,11 @@
 package com.quadrivium.devs.bonvoyage;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +36,25 @@ public class PlaceActivity extends AppCompatActivity {
         }
         textHeader.setText(query);
         findPlaces(query,name);
+
+        final ListView placeList =findViewById(R.id.PlaceList);
+        placeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                TextView placeName = view.findViewById(R.id.name);
+                TextView placeID = view.findViewById(R.id.placeID);
+                String ID=placeID.getText().toString().replaceAll("\\s","%20");
+                String name=placeName.getText().toString();
+                String URI="https://www.google.com/maps/search/?api=1&query="+name+"&query_place_id="+ID;
+                Uri IntentUri = Uri.parse(URI);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, IntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
     }
 
     private void findPlaces(String query,String name){

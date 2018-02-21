@@ -112,6 +112,7 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_trip) {
+
         } else if (id == R.id.nav_favorite) {
 
         } else if (id == R.id.nav_settings) {

@@ -8,20 +8,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        TabLayout tabLayout =  findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        TextView skipText = (TextView) findViewById(R.id.skipText);
+        TextView skipText = findViewById(R.id.skipText);
         skipText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

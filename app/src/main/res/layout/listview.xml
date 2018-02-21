@@ -25,6 +25,12 @@
             android:maxLines="1"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/placeID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
     </LinearLayout>
     <TextView
         android:id="@+id/address"

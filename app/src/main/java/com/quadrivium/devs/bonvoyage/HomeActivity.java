@@ -97,7 +97,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -114,7 +114,7 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_trip) {
 
         } else if (id == R.id.nav_favorite) {
-
+            startActivity(new Intent( HomeActivity.this, FavoriteActivity.class));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent( HomeActivity.this, SettingsActivity.class));
         } else if (id == R.id.nav_help) {
@@ -187,14 +187,14 @@ public class HomeActivity extends AppCompatActivity
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
 
-        cityField = (TextView)findViewById(R.id.city_field);
-        updatedField = (TextView)findViewById(R.id.updated_field);
-        detailsField = (TextView)findViewById(R.id.details_field);
-        currentTemperatureField = (TextView)findViewById(R.id.current_temperature_field);
-        humidity_field = (TextView)findViewById(R.id.humidity_field);
-        sunrise_field = (TextView)findViewById(R.id.sunrise_field);
-        sunset_field = (TextView)findViewById(R.id.sunset_field);
-        weatherIcon = (TextView)findViewById(R.id.weather_icon);
+        cityField = findViewById(R.id.city_field);
+        updatedField = findViewById(R.id.updated_field);
+        detailsField = findViewById(R.id.details_field);
+        currentTemperatureField = findViewById(R.id.current_temperature_field);
+        humidity_field = findViewById(R.id.humidity_field);
+        sunrise_field = findViewById(R.id.sunrise_field);
+        sunset_field =findViewById(R.id.sunset_field);
+        weatherIcon = findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
 

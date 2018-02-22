@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.quadrivium.devs.bonvoyage.FavoriteActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView android:id="@+id/Heading"
+        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:text="Favorite"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="40dp"
+        android:background="@drawable/side_nav_bar"
+        android:textColor="@color/colorText"/>
+    <ListView
+        android:id="@+id/CityList"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
+</LinearLayout>

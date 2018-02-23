@@ -27,15 +27,15 @@ public class CityListAdapter extends ArrayAdapter<City>{
             View listItemView = convertView;
             if(listItemView == null) {
                 listItemView = LayoutInflater.from(getContext()).inflate(
-                        R.layout.listview, parent, false);
+                        R.layout.list_favorite, parent, false);
             }
-            TextView spotID = listItemView.findViewById(R.id.placeID);
-            TextView spotName = listItemView.findViewById(R.id.name);
+            TextView cityID = listItemView.findViewById(R.id.cityID);
+            TextView cityName = listItemView.findViewById(R.id.cityName);
 
             City currentCity = getItem(position);
 
-            spotID.setText(currentCity.getCityID());
-            spotName.setText(currentCity.getCityName());
+            cityID.setText(currentCity.getCityID());
+            cityName.setText(currentCity.getCityName());
 
             return listItemView;
         }

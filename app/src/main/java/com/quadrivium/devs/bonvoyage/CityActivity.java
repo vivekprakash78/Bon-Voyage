@@ -12,6 +12,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
@@ -164,11 +164,14 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
     public void addToFav(){
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_FAV,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String res) {
                         try {
+                            progressBar.setVisibility(View.GONE);
                             JSONObject response=new JSONObject(res);
                             String result=response.getString("response");
                             Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();

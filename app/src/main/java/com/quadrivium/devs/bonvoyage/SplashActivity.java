@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
                 ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
                 if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+
                     if(SharedPrefManager.getInstance(getApplicationContext()).isLoggedIn())
                     {
                         startActivity(new Intent( SplashActivity.this, HomeActivity.class));

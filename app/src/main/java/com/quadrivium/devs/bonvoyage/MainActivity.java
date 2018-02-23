@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     .make(view, "No internet connection!", Snackbar.LENGTH_INDEFINITE);
             View sbView = snackbar.getView();
             TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
-            textView.setTextColor(Color.RED);
+            textView.setTextColor(Color.YELLOW);
             snackbar.show();
         }
 

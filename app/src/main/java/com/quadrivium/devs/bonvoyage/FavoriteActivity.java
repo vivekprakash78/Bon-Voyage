@@ -1,7 +1,6 @@
 package com.quadrivium.devs.bonvoyage;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,12 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FavoriteActivity extends AppCompatActivity {
 
@@ -39,8 +32,8 @@ public class FavoriteActivity extends AppCompatActivity {
         placeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textID=findViewById(R.id.cityID);
-                TextView textName=findViewById(R.id.cityName);
+                TextView textID=view.findViewById(R.id.cityID);
+                TextView textName=view.findViewById(R.id.cityName);
 
                 Intent intent = new Intent(FavoriteActivity.this, CityActivity.class);
                 Bundle b = new Bundle();

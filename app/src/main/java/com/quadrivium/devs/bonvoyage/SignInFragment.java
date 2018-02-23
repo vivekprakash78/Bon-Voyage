@@ -106,7 +106,8 @@ public class SignInFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

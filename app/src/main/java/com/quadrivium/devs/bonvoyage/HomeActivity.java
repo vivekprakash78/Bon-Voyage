@@ -40,10 +40,10 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -111,14 +111,10 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_trip) {
-
-        } else if (id == R.id.nav_favorite) {
+        if (id == R.id.nav_favorite) {
             startActivity(new Intent( HomeActivity.this, FavoriteActivity.class));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent( HomeActivity.this, SettingsActivity.class));
-        } else if (id == R.id.nav_help) {
-
         } else if (id == R.id.nav_about_us) {
 
         }

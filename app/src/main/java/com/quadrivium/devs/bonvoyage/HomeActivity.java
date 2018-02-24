@@ -1,12 +1,11 @@
 package com.quadrivium.devs.bonvoyage;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.location.Location;
-import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -34,16 +33,15 @@ public class HomeActivity extends AppCompatActivity
     TextView cityField, detailsField, currentTemperatureField, humidity_field, sunrise_field, sunset_field, weatherIcon, updatedField;
     Typeface weatherFont;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
-    AppLocationService appLocationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -60,44 +58,35 @@ public class HomeActivity extends AppCompatActivity
         name.setText(user.getName());
         email.setText(user.getEmail());
 
-        appLocationService = new AppLocationService(
-                HomeActivity.this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-        Location location = appLocationService
-                .getLocation(LocationManager.GPS_PROVIDER);
-
-        if (location != null) {
-            double latitude = location.getLatitude();
-            double longitude = location.getLongitude();
-            LocationAddress locationAddress = new LocationAddress();
-            locationAddress.getAddressFromLocation(latitude, longitude,
-                    getApplicationContext(), new GeocoderHandler());
-        } else {
-            Toast.makeText(this, "Location service is disabled", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-    private class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
             }
-            findWeather(locationAddress);
+            else
+                getLocation();
         }
-
+        else{
+            getLocation();
+        }
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 0:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocation();
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -111,13 +100,10 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_trip) {
-        } else if (id == R.id.nav_favorite) {
-
+        if (id == R.id.nav_favorite) {
+            startActivity(new Intent( HomeActivity.this, FavoriteActivity.class));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent( HomeActivity.this, SettingsActivity.class));
-        } else if (id == R.id.nav_help) {
-
         } else if (id == R.id.nav_about_us) {
 
         }
@@ -182,18 +168,33 @@ public class HomeActivity extends AppCompatActivity
             }
         }
     }
+    protected void getLocation(){
+        String address = "";
+        GPSService mGPSService = new GPSService(HomeActivity.this);
+        mGPSService.getLocation();
+
+        if (mGPSService.isLocationAvailable == false) {
+            Toast.makeText(getApplicationContext(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
+        } else {
+            address = mGPSService.getLocationAddress();
+            TextView cityName=findViewById(R.id.city_field);
+            cityName.setText(address);
+            findWeather(address);
+        }
+        mGPSService.closeGPS();
+    }
     protected void findWeather(String locationAddress){
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
 
-        cityField = (TextView)findViewById(R.id.city_field);
-        updatedField = (TextView)findViewById(R.id.updated_field);
-        detailsField = (TextView)findViewById(R.id.details_field);
-        currentTemperatureField = (TextView)findViewById(R.id.current_temperature_field);
-        humidity_field = (TextView)findViewById(R.id.humidity_field);
-        sunrise_field = (TextView)findViewById(R.id.sunrise_field);
-        sunset_field = (TextView)findViewById(R.id.sunset_field);
-        weatherIcon = (TextView)findViewById(R.id.weather_icon);
+        cityField = findViewById(R.id.city_field);
+        updatedField = findViewById(R.id.updated_field);
+        detailsField = findViewById(R.id.details_field);
+        currentTemperatureField = findViewById(R.id.current_temperature_field);
+        humidity_field = findViewById(R.id.humidity_field);
+        sunrise_field = findViewById(R.id.sunrise_field);
+        sunset_field =findViewById(R.id.sunset_field);
+        weatherIcon = findViewById(R.id.weather_icon);
         weatherIcon.setTypeface(weatherFont);
 
 

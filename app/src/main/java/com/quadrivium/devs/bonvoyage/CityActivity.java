@@ -12,9 +12,15 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.PlacePhotoMetadataResponse;
 import com.google.android.gms.location.places.PlacePhotoResponse;
@@ -24,11 +30,18 @@ import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class CityActivity extends AppCompatActivity implements View.OnClickListener{
 
     private GeoDataClient mGeoDataClient;
     TextView detailsField, currentTemperatureField, humidity_field, weatherIcon;
     Typeface weatherFont;
+    String id = "-1", name = "Place not found";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +49,6 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_city);
         mGeoDataClient = Places.getGeoDataClient(this, null);
         Bundle b = getIntent().getExtras();
-        String id = "-1", name = "Place not found";
         if (b != null) {
             id = b.getString("id");
             name = b.getString("name");
@@ -84,11 +96,11 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
 
         FloatingActionButton favoriteBtn = findViewById(R.id.favoriteBtn);
         favoriteBtn.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Toast.makeText(CityActivity.this, "Add to favorite", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
+                @Override
+                public void onClick(View v) {
+                    addToFav();
+                }
+            }
         );
     }
 
@@ -150,5 +162,46 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         });
+    }
+    public void addToFav(){
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_FAV,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String res) {
+                        try {
+                            progressBar.setVisibility(View.GONE);
+                            JSONObject response=new JSONObject(res);
+                            String result=response.getString("response");
+                            Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", SharedPrefManager.getInstance(getApplicationContext()).getUser().getEmail());
+                params.put("cityID", id);
+                params.put("cityName", name);
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
     }

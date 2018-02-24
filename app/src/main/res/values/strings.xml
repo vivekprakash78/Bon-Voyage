@@ -25,4 +25,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="facebook_app_id">865403900304723</string>
+    <string name="fb_login_protocol_scheme">fb865403900304723</string>
+
 </resources>

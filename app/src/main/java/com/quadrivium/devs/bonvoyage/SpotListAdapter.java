@@ -31,7 +31,7 @@ public class SpotListAdapter extends ArrayAdapter<Spot> {
                 listItemView = LayoutInflater.from(getContext()).inflate(
                         R.layout.listview, parent, false);
             }
-
+            TextView spotID = listItemView.findViewById(R.id.placeID);
             TextView spotName = listItemView.findViewById(R.id.name);
             TextView spotAddress = listItemView.findViewById(R.id.address);
             TextView spotOpenNow= listItemView.findViewById(R.id.openNow);
@@ -39,7 +39,8 @@ public class SpotListAdapter extends ArrayAdapter<Spot> {
 
             Spot currentSpot = getItem(position);
 
-            spotName.setText(currentSpot.getSpotname());
+            spotID.setText(currentSpot.getSpotID());
+            spotName.setText(currentSpot.getSpotName());
             spotAddress.setText(currentSpot.getSpotAddress());
             if(currentSpot.getSpotOpenNow()){
                 spotOpenNow.setTextColor(Color.rgb(42,230,50)); //2ae632
@@ -49,8 +50,8 @@ public class SpotListAdapter extends ArrayAdapter<Spot> {
                 spotOpenNow.setTextColor(Color.rgb(255,58,58));
                 spotOpenNow.setText("Closed");
             }
-            if(currentSpot.getspotRating()!=0.0)
-                spotRating.setText(""+currentSpot.getspotRating());
+            if(currentSpot.getSpotRating()!=0.0)
+                spotRating.setText(""+currentSpot.getSpotRating());
             else
                 spotRating.setText("- -");
             return listItemView;

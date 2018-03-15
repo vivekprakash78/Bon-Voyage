@@ -54,7 +54,8 @@
                 android:value="com.quadrivium.devs.bonvoyage.HomeActivity" />
         </activity>
         <activity android:name=".PlaceActivity" />
-        <activity android:name=".FavoriteActivity"></activity>
+        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".eventActivity"></activity>
     </application>
 
 </manifest>

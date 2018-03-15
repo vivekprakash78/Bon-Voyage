@@ -92,7 +92,8 @@ public class PlaceActivity extends AppCompatActivity {
                                     formatted_address=placeObj.getString("formatted_address");
 
                                 if (placeObj.has("opening_hours"))
-                                    open_now=placeObj.getJSONObject("opening_hours").getBoolean("open_now");
+                                    if (placeObj.getJSONObject("opening_hours").has("open_now"))
+                                        open_now=placeObj.getJSONObject("opening_hours").getBoolean("open_now");
 
                                 if (placeObj.has("rating"))
                                     rating=placeObj.getDouble("rating");

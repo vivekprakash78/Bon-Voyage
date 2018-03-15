@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -26,6 +27,8 @@ public class FavoriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
+        Window window = this.getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorStatusAccent));
         String email=SharedPrefManager.getInstance(getApplicationContext()).getUser().getEmail();
         findCity(email);
         final ListView placeList =findViewById(R.id.CityList);
@@ -77,7 +80,8 @@ public class FavoriteActivity extends AppCompatActivity {
                                 ListView listView = findViewById(R.id.CityList);
                                 listView.setAdapter(cityAdapter);
                             }
-                            Toast.makeText(FavoriteActivity.this,"No favorite city found",Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(FavoriteActivity.this,"No favorite city found",Toast.LENGTH_SHORT).show();
                         }
                         catch (JSONException e){
                             Toast.makeText(FavoriteActivity.this,"No record found",Toast.LENGTH_SHORT).show();

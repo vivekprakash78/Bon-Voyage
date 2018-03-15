@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +28,8 @@ public class PlaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
+        Window window = this.getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorStatusAccent));
         TextView textHeader = findViewById(R.id.PlaceHeading);
         Bundle b = getIntent().getExtras();
         String query = "Places", name = "Mumbai";

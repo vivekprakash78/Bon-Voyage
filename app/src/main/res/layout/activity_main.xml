@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
+        app:tabBackground="@color/colorPrimaryDark"
         app:tabTextColor="@color/colorText"
         app:tabSelectedTextColor="@color/colorText"/>
     <android.support.v4.view.ViewPager

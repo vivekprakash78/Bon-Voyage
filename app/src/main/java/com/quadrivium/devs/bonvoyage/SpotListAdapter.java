@@ -43,11 +43,11 @@ public class SpotListAdapter extends ArrayAdapter<Spot> {
             spotName.setText(currentSpot.getSpotName());
             spotAddress.setText(currentSpot.getSpotAddress());
             if(currentSpot.getSpotOpenNow()){
-                spotOpenNow.setTextColor(Color.rgb(42,230,50)); //2ae632
+                spotOpenNow.setTextColor(Color.rgb(29,233,182));
                 spotOpenNow.setText("Open Now");
             }
             else{
-                spotOpenNow.setTextColor(Color.rgb(255,58,58));
+                spotOpenNow.setTextColor(Color.rgb(255,46,71));
                 spotOpenNow.setText("Closed");
             }
             if(currentSpot.getSpotRating()!=0.0)

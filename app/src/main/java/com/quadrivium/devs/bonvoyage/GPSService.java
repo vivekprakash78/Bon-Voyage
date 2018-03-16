@@ -173,8 +173,6 @@ public class GPSService extends Service implements LocationListener {
 
     }
 
-
-
     /**
      * get latitude
      *

@@ -2,6 +2,7 @@ package com.quadrivium.devs.bonvoyage;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -10,6 +11,8 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Window window = this.getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorStatusAccent));
 
         TextView name = (TextView) findViewById(R.id.user_profile_name);
         TextView email = (TextView) findViewById(R.id.user_profile_email);

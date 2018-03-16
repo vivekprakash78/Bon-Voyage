@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -26,6 +27,8 @@ public class FavoriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite);
+        Window window = this.getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorStatusAccent));
         String email=SharedPrefManager.getInstance(getApplicationContext()).getUser().getEmail();
         findCity(email);
         final ListView placeList =findViewById(R.id.CityList);
@@ -56,26 +59,29 @@ public class FavoriteActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         progressBar.setVisibility(View.GONE);
                         try{
-                            JSONArray city=response.getJSONArray("city");
-
-                            ArrayList<String> listdata = new ArrayList<>();
-                            if (city != null) {
-                                for (int i=0;i<city.length();i++){
-                                    listdata.add(city.getString(i));
+                            if(response.getBoolean("status")) {
+                                JSONArray city = response.getJSONArray("city");
+                                ArrayList<String> listdata = new ArrayList<>();
+                                if (city != null) {
+                                    for (int i = 0; i < city.length(); i++) {
+                                        listdata.add(city.getString(i));
+                                    }
                                 }
-                            }
-                            ArrayList<City> cityList = new ArrayList<>();
+                                ArrayList<City> cityList = new ArrayList<>();
 
-                            for (int i=0;i<city.length();i++){
-                                JSONObject cityObj=new JSONObject( listdata.get(i) );
-                                String city_id=cityObj.getString("cityID");
-                                String city_name=cityObj.getString("cityName");
-                                cityList.add(new City(city_id,city_name));
-                            }
+                                for (int i = 0; i < city.length(); i++) {
+                                    JSONObject cityObj = new JSONObject(listdata.get(i));
+                                    String city_id = cityObj.getString("cityID");
+                                    String city_name = cityObj.getString("cityName");
+                                    cityList.add(new City(city_id, city_name));
+                                }
 
-                            CityListAdapter cityAdapter = new CityListAdapter(FavoriteActivity.this, cityList);
-                            ListView listView = findViewById(R.id.CityList);
-                            listView.setAdapter(cityAdapter);
+                                CityListAdapter cityAdapter = new CityListAdapter(FavoriteActivity.this, cityList);
+                                ListView listView = findViewById(R.id.CityList);
+                                listView.setAdapter(cityAdapter);
+                            }
+                            else
+                                Toast.makeText(FavoriteActivity.this,"No favorite city found",Toast.LENGTH_SHORT).show();
                         }
                         catch (JSONException e){
                             Toast.makeText(FavoriteActivity.this,"No record found",Toast.LENGTH_SHORT).show();

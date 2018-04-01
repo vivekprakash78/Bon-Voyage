@@ -6,6 +6,7 @@ package com.quadrivium.devs.bonvoyage;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -128,49 +129,40 @@ public class GPSService extends Service implements LocationListener {
      *
      * @return complete address in String
      */
-    public String getLocationAddress() {
+    public HashMap getLocationAddress() throws IOException {
+
+        HashMap<String,String> location = new HashMap<>();
+        location.put("latitude",String.valueOf(mLatitude));
+        location.put("longitude",String.valueOf(mLongitude));
 
         if (isLocationAvailable) {
-
             Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
-            // Get the current location from the input parameter list
-            // Create a list to contain the result address
+
             List<Address> addresses = null;
             try {
-				/*
-				 * Return 1 address.
-				 */
                 addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
             } catch (IOException e1) {
                 e1.printStackTrace();
-                return ("IO Exception trying to get address:" + e1);
             } catch (IllegalArgumentException e2) {
-                // Error message to post in the log
-                String errorString = "Illegal arguments "
-                        + Double.toString(mLatitude) + " , "
-                        + Double.toString(mLongitude)
-                        + " passed to address service";
                 e2.printStackTrace();
-                return errorString;
             }
+
             // If the reverse geocode returned an address
             if (addresses != null && addresses.size() > 0) {
                 // Get the first address
                 Address address = addresses.get(0);
-				/*
-				 * Format the first line of address (if available), city, and
-				 * country name.
-				 */
+
                 String addressText = address.getLocality();
-                // Return the text
-                return addressText;
-            } else {
-                return "No address found";
+                location.put("name",addressText);
+                return location;
+            }
+            else {
+                return location;
             }
         } else {
-            return "Location Not available";
+            location.put("name","Location Service Not available");
+            return location;
         }
-
     }
 
     /**

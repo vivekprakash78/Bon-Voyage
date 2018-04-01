@@ -19,9 +19,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,27 +34,38 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     TextView cityField, detailsField, currentTemperatureField, humidity_field, sunrise_field, sunset_field, weatherIcon, updatedField;
     Typeface weatherFont;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     GoogleSignInClient mGoogleSignInClient;
+    private GeoDataClient mGeoDataClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mGeoDataClient = Places.getGeoDataClient(this, null);
 
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -80,18 +96,75 @@ public class HomeActivity extends AppCompatActivity
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
             }
             else
-                getLocation();
+                try {
+                    getLocation();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
         }
         else{
-            getLocation();
+            try {
+                getLocation();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+        ImageButton btnHosptital =findViewById(R.id.showHospital);
+        btnHosptital.setOnClickListener(this);
+
+        ImageButton btnPharmacy =findViewById(R.id.showPharmacy);
+        btnPharmacy.setOnClickListener(this);
+
+        ImageButton btnAtm =findViewById(R.id.showAtm);
+        btnAtm.setOnClickListener(this);
+
+        ImageButton btnEvents =findViewById(R.id.showEvents);
+        btnEvents.setOnClickListener(this);
+
+        ImageButton btnGasStations =findViewById(R.id.showGasStations);
+        btnGasStations.setOnClickListener(this);
+
+        ImageButton btnPlacesOfInterest =findViewById(R.id.showPlacesOfInterest);
+        btnPlacesOfInterest.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(HomeActivity.this, PlaceActivity.class);
+        Bundle b = new Bundle();
+        switch (view.getId()){
+            case R.id.showHospital: b.putString("query", "Hospital");
+                break;
+            case R.id.showPharmacy: b.putString("query", "Pharmacy");
+                break;
+            case R.id.showAtm: b.putString("query", "ATM");
+                break;
+            case R.id.showEvents:
+                    Toast.makeText(HomeActivity.this, "Events : Work in progress", Toast.LENGTH_SHORT).show();
+                    return;
+            case R.id.showGasStations: b.putString("query", "Gas stations");
+                break;
+            case R.id.showPlacesOfInterest: b.putString("query", "Places of interest");
+                break;
+        }
+
+        TextView cityName=findViewById(R.id.city_field);
+        b.putString("name", cityName.getText().toString());
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case 0:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation();
+                    try {
+                        getLocation();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 }
@@ -206,21 +279,72 @@ public class HomeActivity extends AppCompatActivity
             }
         }
     }
-    protected void getLocation(){
-        String address = "";
+    protected void getLocation() throws IOException {
         GPSService mGPSService = new GPSService(HomeActivity.this);
         mGPSService.getLocation();
 
         if (mGPSService.isLocationAvailable == false) {
             Toast.makeText(getApplicationContext(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
         } else {
-            address = mGPSService.getLocationAddress();
-            TextView cityName=findViewById(R.id.city_field);
-            cityName.setText(address);
-            findWeather(address);
+            HashMap<String,String> address = mGPSService.getLocationAddress();
+            if(!address.containsKey("name")){
+                findName(address.get("latitude"),address.get("longitude"));
+            }
+            else{
+                TextView cityName=findViewById(R.id.city_field);
+                cityName.setText(address.get("name"));
+                findWeather(address.get("name"));
+            }
         }
         mGPSService.closeGPS();
     }
+
+    private void findName(String latitude,String longitude){
+        String url=String.format(URLs.GetLocationName+"&key=AIzaSyC0tT8196dV1vKo2zaBelKUudm--AbXZfQ",latitude,longitude);
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        JSONArray results = null;
+                        String city ="";
+                        String placeID ="";
+                        try {
+                            results = response.getJSONArray("results");
+                            JSONObject address_comp = results.getJSONObject(0);
+                            JSONArray address = address_comp.getJSONArray("address_components");
+                            for (int i = 0; i < address.length(); i++) {
+                                JSONObject add_Comp = address.getJSONObject(i);
+                                JSONArray types = add_Comp.getJSONArray("types");
+                                for (int j = 0; j < types.length(); j++) {
+                                    if("locality".equals(types.get(j).toString()))
+                                        city = add_Comp.getString("long_name");
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        TextView cityName=findViewById(R.id.city_field);
+                        cityName.setText(city);
+                        findWeather(city);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(HomeActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }){
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
+    }
+
     protected void findWeather(String locationAddress){
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
@@ -239,7 +363,7 @@ public class HomeActivity extends AppCompatActivity
         Weather.placeIdTask asyncTask =new Weather.placeIdTask(new Weather.AsyncResponse() {
             public void processFinish(String weather_city, String weather_description, String weather_temperature, String weather_humidity, String weather_sunrise,String weather_sunset, String weather_updatedOn, String weather_iconText, String sun_rise) {
 
-                cityField.setText(weather_city);
+
                 updatedField.setText("Updated: "+weather_updatedOn);
                 detailsField.setText("Conditions: "+weather_description);
                 currentTemperatureField.setText(weather_temperature);
@@ -252,4 +376,5 @@ public class HomeActivity extends AppCompatActivity
         });
         asyncTask.execute(locationAddress);
     }
+
 }

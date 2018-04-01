@@ -10,7 +10,7 @@
             android:title="Favorite" />
         <item
             android:id="@+id/nav_new_event"
-            android:icon="@drawable/ic_event"
+            android:icon="@drawable/ic_add_event"
             android:title="Add Event" />
         <item
             android:id="@+id/nav_settings"

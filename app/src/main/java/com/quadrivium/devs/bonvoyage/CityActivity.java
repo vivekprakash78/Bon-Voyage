@@ -140,7 +140,6 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
 
                     PlacePhotoMetadata photoMetadata = photoMetadataBuffer.get(0);
 
-
                     Task<PlacePhotoResponse> photoResponse = mGeoDataClient.getPhoto(photoMetadata);
                     photoResponse.addOnCompleteListener(new OnCompleteListener<PlacePhotoResponse>() {
                         @Override
@@ -201,7 +200,6 @@ public class CityActivity extends AppCompatActivity implements View.OnClickListe
                 return params;
             }
         };
-
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
     }

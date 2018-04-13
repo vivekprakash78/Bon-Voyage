@@ -24,6 +24,7 @@
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@android:color/white</item>
     </style>
+
     <style name="TextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/colorText</item>item>

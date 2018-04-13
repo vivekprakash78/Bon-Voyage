@@ -26,12 +26,13 @@
                 android:layout_width="32dp"
                 app:srcCompat="@drawable/ic_location"
                 android:tint="@color/colorAccent"
-                android:layout_weight="0.2"/>
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.3"/>
             <TextView android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:theme="@style/TextViewStyle"
-                android:textSize="20dp"
-                android:layout_weight="0.8"
+                android:textSize="24dp"
+                android:layout_weight="0.7"
                 android:id="@+id/city_field"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -101,4 +102,69 @@
                 />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center">
+
+        <ImageButton android:id="@+id/showHospital"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_hospital"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+
+        <ImageButton android:id="@+id/showPharmacy"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_pharmacy"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+
+        <ImageButton android:id="@+id/showAtm"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_atm"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center">
+
+        <ImageButton android:id="@+id/showEvents"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_events"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+
+        <ImageButton android:id="@+id/showGasStations"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_gas_station"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+
+        <ImageButton
+            android:id="@+id/showPlacesOfInterest"
+            android:layout_height="72dp"
+            android:layout_width="72dp"
+            android:layout_margin="24dp"
+            app:srcCompat="@drawable/ic_point_of_interest"
+            android:tint="@color/colorPrimaryDark"
+            android:elevation="10dp"
+            android:background="@drawable/circle"/>
+    </LinearLayout>
 </LinearLayout>

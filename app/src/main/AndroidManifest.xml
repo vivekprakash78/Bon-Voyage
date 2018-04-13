@@ -24,8 +24,8 @@
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,29 +38,30 @@
         <activity
             android:name=".HomeActivity"
             android:label="Bon Voyage"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".CityActivity"
+            android:parentActivityName=".HomeActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.quadrivium.devs.bonvoyage.HomeActivity" />
         </activity>
         <activity
-            android:name=".CityActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HomeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.quadrivium.devs.bonvoyage.HomeActivity" />
-        </activity>
-        <activity android:name=".PlaceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FavoriteActivity"
-            android:screenOrientation="portrait"/>
+            android:name=".PlaceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FavoriteActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".EventActivity" />
     </application>
 
 </manifest>

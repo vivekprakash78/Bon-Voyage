@@ -7,15 +7,11 @@
         <item
             android:id="@+id/nav_favorite"
             android:icon="@drawable/ic_favorite"
-            android:title="Favorite" />
+            android:title="Favourite" />
         <item
             android:id="@+id/nav_new_event"
             android:icon="@drawable/ic_add_event"
             android:title="Add Event" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="Settings" />
         <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/ic_about_us"

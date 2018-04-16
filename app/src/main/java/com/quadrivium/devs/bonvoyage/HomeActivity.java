@@ -140,8 +140,14 @@ public class HomeActivity extends AppCompatActivity
                 break;
             case R.id.showAtm: b.putString("query", "ATM");
                 break;
-            case R.id.showEvents:
-                    Toast.makeText(HomeActivity.this, "Events : Work in progress", Toast.LENGTH_SHORT).show();
+            case R.id.showEvents: {
+                    Intent eventList = new Intent(HomeActivity.this, EventListActivity.class);
+                    Bundle eventBundle = new Bundle();
+                    TextView cityName=findViewById(R.id.city_field);
+                    eventBundle.putString("location", cityName.getText().toString());
+                    eventList.putExtras(eventBundle);
+                    startActivity(eventList);
+                }
                     return;
             case R.id.showGasStations: b.putString("query", "Gas stations");
                 break;
@@ -191,10 +197,11 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_favorite) {
             startActivity(new Intent( HomeActivity.this, FavoriteActivity.class));
-        } else if (id == R.id.nav_settings) {
-            startActivity(new Intent( HomeActivity.this, SettingsActivity.class));
         } else if (id == R.id.nav_about_us) {
-
+            startActivity(new Intent( HomeActivity.this, AboutActivity.class));
+        }
+        else if(id == R.id.nav_new_event){
+            startActivity(new Intent( HomeActivity.this, EventActivity.class));
         }
         else if (id == R.id.nav_sign_out) {
             finish();

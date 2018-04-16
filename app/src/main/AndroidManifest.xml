@@ -41,13 +41,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
             android:name=".CityActivity"
             android:parentActivityName=".HomeActivity"
             android:screenOrientation="portrait">
@@ -61,7 +54,14 @@
         <activity
             android:name=".FavoriteActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".EventActivity" />
+        <activity
+            android:name=".EventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EventListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AboutActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

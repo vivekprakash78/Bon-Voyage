@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/InputLayout">
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/datePickerEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_add_event"
@@ -112,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:theme="@style/InputLayout">
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/timePickerEdit"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_time"

@@ -6,8 +6,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -33,13 +31,12 @@ import java.util.Map;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EventActivity extends AppCompatActivity implements OnClickListener {
+public class EventActivity extends AppCompatActivity {
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private TextInputLayout eventName;
@@ -49,8 +46,8 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormatter;
-    private TimePickerDialog fromTimepickerDialog;
-    private TimePickerDialog toTimepickerDialog;
+    private TimePickerDialog fromTimePickerDialog;
+    private TimePickerDialog toTimePickerDialog;
     private TextView fromTimeEtxt;
     private TextView toTimeEtxt;
     private TextInputLayout description;
@@ -86,6 +83,23 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
                 }
             }
 
+        });
+
+        findViewById(R.id.datePickerEdit).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(EventActivity.this,"Select start date",Toast.LENGTH_SHORT).show();
+                fromDatePickerDialog.show();
+
+            }
+        });
+
+        findViewById(R.id.timePickerEdit).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(EventActivity.this,"Select start time",Toast.LENGTH_SHORT).show();
+                fromTimePickerDialog.show();
+            }
         });
 
        findViewById(R.id.addOn).setOnClickListener( new View.OnClickListener() {
@@ -149,10 +163,7 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
         description=findViewById(R.id.description);
     }
     private void setDateTimeField() {
-        fromDateEtxt.setOnClickListener(this);
-        toDateEtxt.setOnClickListener(this);
-        fromTimeEtxt.setOnClickListener(this);
-        toTimeEtxt.setOnClickListener(this);
+
         final Calendar newCalendar = Calendar.getInstance();
         fromDatePickerDialog = new DatePickerDialog(this, new OnDateSetListener() {
 
@@ -160,6 +171,8 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 fromDateEtxt.setText(dateFormatter.format(newDate.getTime()));
+                Toast.makeText(EventActivity.this,"Select end date",Toast.LENGTH_SHORT).show();
+                toDatePickerDialog.show();
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -180,10 +193,12 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker;
-        fromTimepickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        fromTimePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 fromTimeEtxt.setText( selectedHour + ":" + selectedMinute);
+                Toast.makeText(EventActivity.this,"Select end time",Toast.LENGTH_SHORT).show();
+                toTimePickerDialog.show();
             }
         }, hour, minute, true);//Yes 24 hour time
 
@@ -191,29 +206,13 @@ public class EventActivity extends AppCompatActivity implements OnClickListener 
         int nhour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int nminute = mcurrentTime.get(Calendar.MINUTE);
 
-        toTimepickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        toTimePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 toTimeEtxt.setText( selectedHour + ":" + selectedMinute);
             }
         }, nhour, nminute, true);
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view == fromDateEtxt) {
-            fromDatePickerDialog.show();
-        } else if(view == toDateEtxt) {
-            toDatePickerDialog.show();
-        }
-        else if(view==fromTimeEtxt){
-            fromTimepickerDialog.show();
-        }
-        else if(view==toTimeEtxt)
-        {
-            toTimepickerDialog.show();
-        }
     }
 
     @Override

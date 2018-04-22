@@ -112,23 +112,27 @@ public class EventActivity extends AppCompatActivity {
     }
 
     public  void eventData() {
+        (findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_EVENT,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String res) {
                         try {
+                            (findViewById(R.id.progressBar)).setVisibility(View.GONE);
                             JSONObject response=new JSONObject(res);
                             String result=response.getString("response");
                             Toast.makeText(getApplicationContext(),result, Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(EventActivity.this,HomeActivity.class));
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Connection Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Volley Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(EventActivity.this,HomeActivity.class));
                     }
                 }) {
             @Override

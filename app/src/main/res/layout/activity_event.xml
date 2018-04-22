@@ -4,182 +4,192 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryDark">
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.CardView
-            android:id="@+id/Heading"
-            android:layout_height="wrap_content"
+    <RelativeLayout android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <LinearLayout android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="1dp"
-            app:cardElevation="20dp"
-            app:cardCornerRadius="0dp">
-            <TextView
-                android:layout_height="100dp"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:id="@+id/Heading"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:text="Add event"
-                android:background="@drawable/side_nav_bar"
-                android:gravity="center_horizontal|center_vertical"
-                android:textSize="40dp"
-                android:textColor="@color/colorText"/>
-        </android.support.v7.widget.CardView>
-        <LinearLayout
-            android:id="@+id/eventForm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/eventname"
+                android:layout_marginBottom="1dp"
+                app:cardElevation="20dp"
+                app:cardCornerRadius="0dp">
+                <TextView
+                    android:layout_height="100dp"
+                    android:layout_width="match_parent"
+                    android:text="Add event"
+                    android:background="@drawable/side_nav_bar"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textSize="40dp"
+                    android:textColor="@color/colorText"/>
+            </android.support.v7.widget.CardView>
+            <LinearLayout
+                android:id="@+id/eventForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/InputLayout">
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_events"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawablePadding="16dp"
-                    android:hint="Event Name"
-                    android:textColor="@color/colorText"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/placePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/InputLayout">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/placePickerEdit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_location"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawablePadding="16dp"
-                    android:hint="Location"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/colorText"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/datePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/InputLayout">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/datePickerEdit"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/eventname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_add_event"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawablePadding="16dp"
-                    android:hint="Date"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/colorText"
-                    android:inputType="text"/>
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:id="@+id/date"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="8dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/etxt_fromdate"
+                    android:theme="@style/InputLayout">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_events"
+                        android:drawableTint="@color/colorAccent"
+                        android:drawablePadding="16dp"
+                        android:hint="Event Name"
+                        android:textColor="@color/colorText"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/placePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/InputLayout">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/placePickerEdit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_location"
+                        android:drawableTint="@color/colorAccent"
+                        android:drawablePadding="16dp"
+                        android:hint="Location"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/colorText"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/datePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/InputLayout">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/datePickerEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_add_event"
+                        android:drawableTint="@color/colorAccent"
+                        android:drawablePadding="16dp"
+                        android:hint="Date"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/colorText"
+                        android:inputType="text"/>
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/date"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="From"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    />
-                <TextView
-                    android:id="@+id/etxt_todate"
+                    android:paddingVertical="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/etxt_fromdate"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="From"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:id="@+id/etxt_todate"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="To"
+                        android:gravity="center"
+                        android:textSize="18sp"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/timePicker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/InputLayout">
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/timePickerEdit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_time"
+                        android:drawableTint="@color/colorAccent"
+                        android:drawablePadding="16dp"
+                        android:hint="Time"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/colorText"
+                        android:inputType="text"/>
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/time"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="To"
-                    android:gravity="center"
-                    android:textSize="18sp"
-                    android:layout_weight="1"/>
-            </LinearLayout>
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/timePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/InputLayout">
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/timePickerEdit"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_time"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawablePadding="16dp"
-                    android:hint="Time"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/colorText"
-                    android:inputType="text"/>
-            </android.support.design.widget.TextInputLayout>
-            <LinearLayout
-                android:id="@+id/time"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="8dp"
-                android:orientation="horizontal">
+                    android:paddingVertical="8dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/etxt_fromtime"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="From"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:id="@+id/etxt_totime"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="To"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/etxt_fromtime"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="From"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/etxt_totime"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="To"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                </LinearLayout>
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="53dp"
-                android:theme="@style/InputLayout"
-                app:errorEnabled="true">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:theme="@style/InputLayout"
+                    app:errorEnabled="true">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/eventdescription"
-                    android:layout_width="fill_parent"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/eventdescription"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="16dp"
+                        android:drawableTint="@color/colorAccent"
+                        android:drawableStart="@drawable/ic_description"
+                        android:hint="Event Description"
+                        android:inputType="textLongMessage"
+                        android:lines="10"
+                        android:scrollHorizontally="false"
+                        android:singleLine="false"
+                        android:textColor="@color/colorText" />
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                    android:id="@+id/addOn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="16dp"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawableStart="@drawable/ic_description"
-                    android:hint="Event Description"
-                    android:inputType="textLongMessage"
-                    android:lines="10"
-                    android:scrollHorizontally="false"
-                    android:singleLine="false"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Add event"
                     android:textColor="@color/colorText" />
-            </android.support.design.widget.TextInputLayout>
-            <Button
-                android:id="@+id/addOn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Add event"
-                android:textColor="@color/colorText" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
 </ScrollView>

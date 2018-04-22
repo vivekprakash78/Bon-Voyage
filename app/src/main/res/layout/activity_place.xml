@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.quadrivium.devs.bonvoyage.PlaceActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="1dp"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="0dp">
-        <TextView android:id="@+id/PlaceHeading"
-            android:layout_height="100dp"
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="Sample"
-            android:gravity="center_horizontal|center_vertical"
-            android:textSize="40dp"
-            android:background="@drawable/side_nav_bar"
-            android:textColor="@color/colorText"/>
-    </android.support.v7.widget.CardView>
-    <ListView
-        android:id="@+id/PlaceList"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp">
-    </ListView>
-</LinearLayout>
+            android:layout_marginBottom="1dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="0dp">
+            <TextView android:id="@+id/PlaceHeading"
+                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:text="Sample"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="40dp"
+                android:background="@drawable/side_nav_bar"
+                android:textColor="@color/colorText"/>
+        </android.support.v7.widget.CardView>
+        <ListView
+            android:id="@+id/PlaceList"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp">
+        </ListView>
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

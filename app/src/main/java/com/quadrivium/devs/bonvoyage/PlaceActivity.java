@@ -61,6 +61,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void findPlaces(String query,String name){
+        findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
         query = query.replaceAll(" ", "%20");
         String url=URLs.GetPlaces+"?query="+query+"%20in%20"+name+"&key=AIzaSyBlOCbMZbhhrCCvrlOo0H2GKsT1vLNtQ8U";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -69,6 +70,7 @@ public class PlaceActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
+                            findViewById(R.id.progressBar).setVisibility(View.GONE);
                             JSONArray place=response.getJSONArray("results");
 
                             ArrayList<String> listdata = new ArrayList<>();
